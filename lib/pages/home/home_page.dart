@@ -247,6 +247,7 @@ class _RecipeDisplay extends StatelessWidget {
         children: [
           RecipeCard(
             recipe: recipe,
+            onTap: () {}, // Add required onTap parameter
             onSave: onSave,
             onAddToShoppingList: onAddToShoppingList,
             onOpenCookingMode: onOpenCookingMode,

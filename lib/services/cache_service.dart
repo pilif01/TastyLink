@@ -135,7 +135,7 @@ class CacheService {
       if (localItem != null) {
         // Merge logic: prefer remote data but keep local checked state if more recent
         final mergedItem = localItem.checked != remoteItem.checked
-            ? (localItem.addedAt.isAfter(remoteItem.addedAt) ? localItem : remoteItem)
+            ? (localItem.createdAt.isAfter(remoteItem.createdAt) ? localItem : remoteItem)
             : remoteItem;
         merged[remoteItem.id] = mergedItem;
       } else {

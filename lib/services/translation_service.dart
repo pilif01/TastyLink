@@ -1,17 +1,13 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/ingredient.dart';
 import '../models/step_item.dart';
 import '../models/recipe_text.dart';
 
 class TranslationService {
-  static const String _modelUrl = 'https://huggingface.co/Helsinki-NLP/opus-mt-en-ro/resolve/main/';
   static const String _modelName = 'opus-mt-en-ro';
-  static const String _modelVersion = '1.0.0';
   
   static TranslationService? _instance;
   static TranslationService get instance => _instance ??= TranslationService._();
@@ -80,8 +76,7 @@ class TranslationService {
     return RecipeText(
       original: originalText.original,
       ro: translatedOriginal,
-      summary: originalText.summary != null ? await translateText(originalText.summary!) : null,
-      notes: originalText.notes != null ? await translateText(originalText.notes!) : null,
+      en: originalText.en,
     );
   }
   

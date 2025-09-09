@@ -1,75 +1,98 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
-import '../core/constants.dart';
 
 part 'shopping_item.g.dart';
 
-@HiveType(typeId: 9)
+@HiveType(typeId: 5)
 class ShoppingItem extends HiveObject {
   @HiveField(0)
   final String id;
 
   @HiveField(1)
-  final String? recipeId;
-
-  @HiveField(2)
   final String name;
 
-  @HiveField(3)
+  @HiveField(2)
   final double? quantity;
 
-  @HiveField(4)
+  @HiveField(3)
   final String? unit;
+
+  @HiveField(4)
+  final String? category;
 
   @HiveField(5)
   final bool checked;
 
   @HiveField(6)
-  final String category;
+  final String? recipeId;
 
   @HiveField(7)
-  final DateTime addedAt;
+  final DateTime createdAt;
 
   @HiveField(8)
-  final String? notes;
+  final DateTime updatedAt;
 
   ShoppingItem({
     required this.id,
-    this.recipeId,
     required this.name,
     this.quantity,
     this.unit,
+    this.category,
     this.checked = false,
-    this.category = IngredientCategory.other,
-    required this.addedAt,
-    this.notes,
+    this.recipeId,
+    required this.createdAt,
+    required this.updatedAt,
   });
+
+  /// Create a new shopping item
+  factory ShoppingItem.create({
+    required String name,
+    double? quantity,
+    String? unit,
+    String? category,
+    String? recipeId,
+  }) {
+    final now = DateTime.now();
+    return ShoppingItem(
+      id: '${now.millisecondsSinceEpoch}_${name.hashCode}',
+      name: name,
+      quantity: quantity,
+      unit: unit,
+      category: category,
+      recipeId: recipeId,
+      createdAt: now,
+      updatedAt: now,
+    );
+  }
+
+  /// Get added at date (alias for createdAt)
+  DateTime get addedAt => createdAt;
 
   factory ShoppingItem.fromMap(Map<String, dynamic> map) {
     return ShoppingItem(
       id: map['id'] ?? '',
-      recipeId: map['recipeId'],
       name: map['name'] ?? '',
-      quantity: map['qty']?.toDouble(),
+      quantity: map['quantity']?.toDouble(),
       unit: map['unit'],
+      category: map['category'],
       checked: map['checked'] ?? false,
-      category: map['category'] ?? IngredientCategory.other,
-      addedAt: (map['addedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-      notes: map['notes'],
+      recipeId: map['recipeId'],
+      createdAt: (map['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      updatedAt: (map['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'recipeId': recipeId,
       'name': name,
-      'qty': quantity,
+      'quantity': quantity,
       'unit': unit,
-      'checked': checked,
       'category': category,
-      'addedAt': Timestamp.fromDate(addedAt),
-      'notes': notes,
+      'checked': checked,
+      'recipeId': recipeId,
+      'createdAt': Timestamp.fromDate(createdAt),
+      'updatedAt': Timestamp.fromDate(updatedAt),
     };
   }
 
@@ -78,58 +101,28 @@ class ShoppingItem extends HiveObject {
     return ShoppingItem.fromMap({...data, 'id': doc.id});
   }
 
-  factory ShoppingItem.create({
-    required String name,
-    double? quantity,
-    String? unit,
-    String? category,
-    String? recipeId,
-    String? notes,
-  }) {
-    return ShoppingItem(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      recipeId: recipeId,
-      name: name,
-      quantity: quantity,
-      unit: unit,
-      category: category ?? IngredientCategory.other,
-      addedAt: DateTime.now(),
-      notes: notes,
-    );
-  }
-
   ShoppingItem copyWith({
     String? id,
-    String? recipeId,
     String? name,
     double? quantity,
     String? unit,
-    bool? checked,
     String? category,
-    DateTime? addedAt,
-    String? notes,
+    bool? checked,
+    String? recipeId,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return ShoppingItem(
       id: id ?? this.id,
-      recipeId: recipeId ?? this.recipeId,
       name: name ?? this.name,
       quantity: quantity ?? this.quantity,
       unit: unit ?? this.unit,
-      checked: checked ?? this.checked,
       category: category ?? this.category,
-      addedAt: addedAt ?? this.addedAt,
-      notes: notes ?? this.notes,
+      checked: checked ?? this.checked,
+      recipeId: recipeId ?? this.recipeId,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
-  }
-
-  String get displayText {
-    final qty = quantity != null ? '$quantity ' : '';
-    final unitStr = unit != null ? '$unit ' : '';
-    return '$qty$unitStr$name';
-  }
-
-  String get categoryLabel {
-    return IngredientCategory.labels[category] ?? category;
   }
 
   @override
@@ -143,6 +136,8 @@ class ShoppingItem extends HiveObject {
 
   @override
   String toString() {
-    return 'ShoppingItem(id: $id, name: $name, checked: $checked)';
+    final qty = quantity != null ? '$quantity ' : '';
+    final unitStr = unit != null ? '$unit ' : '';
+    return '$qty$unitStr$name';
   }
 }

@@ -13,7 +13,7 @@ final groupedItemsProvider = Provider<Map<String, List<ShoppingItem>>>((ref) {
   final grouped = <String, List<ShoppingItem>>{};
   
   for (final item in items) {
-    final category = item.category;
+    final category = item.category ?? 'Other';
     if (!grouped.containsKey(category)) {
       grouped[category] = [];
     }
@@ -171,7 +171,7 @@ class ShoppingListPage extends ConsumerWidget {
     final nameController = TextEditingController(text: item.name);
     final quantityController = TextEditingController(text: item.quantity?.toString() ?? '');
     final unitController = TextEditingController(text: item.unit ?? '');
-    String selectedCategory = item.category;
+    String selectedCategory = item.category ?? 'Other';
 
     showDialog(
       context: context,

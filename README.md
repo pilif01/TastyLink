@@ -1,234 +1,234 @@
-# TastyLink
+# TastyLink - AI-Powered Recipe Extraction App
 
-A Flutter app for extracting and managing recipes from links with on-device translation to Romanian.
+TastyLink is a Flutter app that extracts recipes from video/audio content using AI transcription and on-device translation. It provides a comprehensive cooking experience with meal planning, shopping lists, and social features.
 
 ## Features
 
-- 🔗 Extract recipes from any URL
-- 🍽️ Save and organize recipes
-- 🛒 Create shopping lists from ingredients
-- 📅 Meal planning
-- 🌍 On-device translation to Romanian
-- 📱 Cross-platform (Android, iOS, Web, Desktop)
-- 🔒 Privacy-focused with local processing
+### Core Functionality
+- **AI Recipe Extraction**: Transcribe video/audio content and extract structured recipe data
+- **On-Device Translation**: Translate recipes to Romanian using local ML models
+- **OCR Support**: Extract text from recipe images
+- **Meal Planning**: Plan meals for the week with shopping list generation
+- **Cooking Mode**: Step-by-step cooking guidance with timers
+- **Social Features**: Share recipes, follow creators, and discover new content
 
-## Tech Stack
+### Monetization
+- **Freemium Model**: Free users get 10 recipe extractions per month
+- **Premium Subscription**: Unlimited processing, ad-free experience, advanced features
+- **In-App Purchases**: Monthly and yearly subscription options
+- **AdMob Integration**: Banner and interstitial ads for free users
 
-- **Frontend**: Flutter with Riverpod state management
-- **Backend**: Firebase (Auth, Firestore, Storage, Functions)
-- **Translation**: Google ML Kit (on-device)
-- **OCR**: Tesseract
-- **Heavy Processing**: Firebase Functions with yt-dlp, ffmpeg, faster-whisper
+### Technical Features
+- **Firebase Backend**: Cloud Functions for transcription, Firestore for data
+- **Offline Support**: Saved recipes and shopping lists work offline
+- **Performance Optimized**: Cold start < 2.5s, 60fps navigation
+- **Analytics & Crash Reporting**: Comprehensive tracking and error monitoring
 
-## Setup Instructions
+## Architecture
+
+### Backend (Firebase Functions)
+- **Container**: Docker image with yt-dlp, ffmpeg, Python, faster-whisper
+- **Function**: `transcribeFromLink` callable function
+- **Processing Pipeline**:
+  1. Download audio using yt-dlp
+  2. Convert to 16kHz mono WAV with ffmpeg
+  3. Transcribe with faster-whisper (small model)
+  4. Extract recipe components using rule-based parsing
+  5. Store canonical recipe in Firestore
+
+### Client Services
+- **TranslationService**: On-device Romanian translation
+- **OcrService**: Image text extraction and recipe parsing
+- **MonetizationService**: IAP, AdMob, usage tracking
+- **NotificationService**: Local notifications and FCM
+- **AnalyticsService**: Event tracking and crash reporting
+
+### Data Models
+- **Recipe**: Core recipe data with multilingual support
+- **Ingredient**: Structured ingredient information
+- **StepItem**: Cooking steps with timing
+- **ShoppingItem**: Shopping list items
+- **UserProfile**: User preferences and settings
+
+## Setup
 
 ### Prerequisites
+- Flutter 3.0+
+- Firebase project
+- Google Cloud Platform account
+- AdMob account (for monetization)
 
-1. Install Flutter SDK (>=3.10.0)
-2. Install Firebase CLI
-3. Create a Firebase project
-4. Enable the following Firebase services:
-   - Authentication
-   - Firestore Database
-   - Storage
-   - Functions
-   - Analytics
-   - Crashlytics
-   - Remote Config
+### Firebase Setup
+1. Create a Firebase project
+2. Enable Authentication, Firestore, Functions, Analytics, Crashlytics
+3. Configure Remote Config with default values
+4. Deploy Firestore rules and indexes
+5. Deploy Cloud Functions
 
-### Installation
-
-1. Clone the repository:
+### Local Development
 ```bash
+# Clone the repository
 git clone <repository-url>
 cd tasty_link
-```
 
-2. Install Flutter dependencies:
-```bash
+# Install dependencies
 flutter pub get
+
+# Run the app
+flutter run
 ```
 
-3. Generate localization files:
-```bash
-flutter gen-l10n
-```
-
-4. Configure Firebase:
-```bash
-# Install Firebase CLI if not already installed
-npm install -g firebase-tools
-
-# Login to Firebase
-firebase login
-
-# Initialize Firebase in the project
-firebase init
-
-# Select the following services:
-# - Firestore
-# - Functions
-# - Storage
-# - Hosting (optional)
-```
-
-5. Update Firebase configuration:
-   - Copy your Firebase config to `firebase/firebase_options.dart`
-   - Update the API keys and project IDs
-
-6. Deploy Firebase Functions:
+### Firebase Functions Deployment
 ```bash
 cd firebase/functions
+
+# Install dependencies
 npm install
-npm run build
+
+# Deploy functions
 firebase deploy --only functions
 ```
 
-### Platform-specific Setup
+## Configuration
 
-#### Android
+### Remote Config
+Set these values in Firebase Remote Config:
+- `free_recipe_limit`: 10 (free recipes per month)
+- `premium_price_eur`: "4.99" (premium price)
+- `enable_ads`: true (enable AdMob ads)
 
-1. Add your `google-services.json` to `android/app/`
-2. Update `android/app/build.gradle` with your Firebase project configuration
-3. The app is configured to handle shared text content
+### AdMob Setup
+1. Create AdMob account
+2. Add app and create ad units
+3. Update ad unit IDs in `MonetizationService`
+4. Test with test ad units in debug mode
 
-#### iOS
+### IAP Setup
+1. Configure products in Google Play Console / App Store Connect
+2. Add product IDs: `premium_monthly`, `premium_yearly`
+3. Test purchases in sandbox environment
 
-1. Add your `GoogleService-Info.plist` to `ios/Runner/`
-2. Update the bundle identifier in `ios/Runner.xcodeproj`
-3. Configure App Groups for share extension (if needed)
+## Testing
 
-### Running the App
-
+### Unit Tests
 ```bash
-# Run on connected device/emulator
-flutter run
-
-# Run on specific platform
-flutter run -d android
-flutter run -d ios
-flutter run -d web
-flutter run -d windows
-flutter run -d macos
-flutter run -d linux
-```
-
-## Project Structure
-
-```
-lib/
-├── app.dart                 # Main app widget
-├── main.dart               # App entry point
-├── core/
-│   └── constants.dart      # App constants
-├── l10n/                   # Localization files
-├── models/                 # Data models
-├── pages/                  # UI pages
-│   ├── home/
-│   ├── saved/
-│   ├── shopping/
-│   ├── planner/
-│   ├── settings/
-│   ├── recipe/
-│   ├── cooking/
-│   ├── social/
-│   ├── profile/
-│   └── onboarding/
-├── providers/              # Riverpod state providers
-├── router/
-│   └── app_router.dart     # Navigation configuration
-├── services/               # Business logic services
-│   ├── auth_service.dart
-│   ├── firestore_service.dart
-│   ├── translation_service.dart
-│   ├── ocr_service.dart
-│   └── share_handler.dart
-├── theme/
-│   └── app_theme.dart      # App theming
-└── widgets/                # Reusable UI components
-
-assets/
-├── brand/                  # Logo and branding assets
-├── illustrations/          # App illustrations
-└── tessdata/              # OCR language data files
-
-firebase/
-├── functions/              # Firebase Functions
-└── firebase_options.dart   # Firebase configuration
-```
-
-## Key Features Implementation
-
-### Recipe Extraction
-- Uses Firebase Functions with yt-dlp for video processing
-- ffmpeg for audio extraction
-- faster-whisper for speech-to-text
-- Web scraping for text-based recipes
-
-### Translation
-- Google ML Kit Language Identification
-- On-device translation to Romanian
-- Automatic model downloading and caching
-
-### OCR
-- Tesseract integration for image text extraction
-- Support for English and Romanian
-- Recipe-specific text parsing
-
-### Sharing
-- Android: Share Target for text/plain
-- iOS: Share Extension with App Groups
-- Cross-platform recipe sharing
-
-## Development
-
-### Adding New Features
-
-1. Create models in `lib/models/`
-2. Add services in `lib/services/`
-3. Create providers in `lib/providers/`
-4. Build UI in `lib/pages/`
-5. Add routing in `lib/router/app_router.dart`
-
-### Testing
-
-```bash
-# Run unit tests
+# Run all tests
 flutter test
 
+# Run specific test file
+flutter test test/services/recipe_extractor_test.dart
+```
+
+### Golden Tests
+```bash
+# Generate golden files
+flutter test --update-goldens
+
+# Run golden tests
+flutter test test/widgets/
+```
+
+### Integration Tests
+```bash
 # Run integration tests
 flutter test integration_test/
-
-# Run with coverage
-flutter test --coverage
 ```
 
-### Building for Production
+## Performance
 
+### Quality Gates
+- **Cold Start**: < 2.5 seconds
+- **Navigation**: 60fps tab switches
+- **Processing**: 30-60 seconds average for typical links
+- **Offline**: Saved recipes and shopping lists work offline
+
+### Optimization
+- Lazy loading of images and data
+- Efficient Firestore queries with proper indexing
+- Cached translations and OCR results
+- Background processing for heavy operations
+
+## Security
+
+### Data Protection
+- User authentication required for all operations
+- Firestore security rules enforce data access
+- No sensitive data in logs or analytics
+- Secure API key management
+
+### Content Safety
+- User reporting system for inappropriate content
+- Moderation tools for admin users
+- Rate limiting on API calls
+- Input validation and sanitization
+
+## Deployment
+
+### Android
 ```bash
-# Android
+# Build APK
 flutter build apk --release
+
+# Build App Bundle
 flutter build appbundle --release
-
-# iOS
-flutter build ios --release
-
-# Web
-flutter build web --release
-
-# Desktop
-flutter build windows --release
-flutter build macos --release
-flutter build linux --release
 ```
+
+### iOS
+```bash
+# Build iOS app
+flutter build ios --release
+```
+
+### Firebase Functions
+```bash
+# Deploy to production
+firebase deploy --only functions
+
+# Deploy with specific region
+firebase deploy --only functions --project production
+```
+
+## Monitoring
+
+### Analytics
+Track key events:
+- `share_intent_opened`: User opened share intent
+- `process_started`: Recipe processing started
+- `process_success`: Recipe processing completed
+- `process_failed_reason`: Processing failed with reason
+- `recipe_saved`: Recipe saved to user's collection
+- `shopping_add`: Item added to shopping list
+- `planner_add`: Meal added to planner
+- `cooking_mode_start`: Cooking mode started
+- `badge_unlocked`: User unlocked achievement
+- `iap_purchase`: In-app purchase completed
+
+### Crash Reporting
+- Automatic crash collection with Firebase Crashlytics
+- Custom error logging for non-fatal issues
+- User context and device information
+- Stack trace analysis and grouping
 
 ## Contributing
 
+### Development Workflow
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+3. Make changes with tests
+4. Run tests and linting
+5. Submit pull request
+
+### Code Style
+- Follow Flutter/Dart style guidelines
+- Use meaningful variable and function names
+- Add documentation for public APIs
+- Write tests for new functionality
+
+### Testing Requirements
+- Unit tests for business logic
+- Widget tests for UI components
+- Integration tests for user flows
+- Golden tests for visual regression
 
 ## License
 
@@ -236,4 +236,27 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-For support, email support@tastylink.app or create an issue in the repository.
+For support and questions:
+- Create an issue in the repository
+- Check the documentation
+- Review existing issues and discussions
+
+## Roadmap
+
+### Phase 1 (Current)
+- ✅ Core recipe extraction
+- ✅ Basic translation support
+- ✅ Monetization system
+- ✅ Analytics and crash reporting
+
+### Phase 2 (Next)
+- 🔄 Advanced OCR with better accuracy
+- 🔄 Social features and user profiles
+- 🔄 Meal planning improvements
+- 🔄 Cooking mode enhancements
+
+### Phase 3 (Future)
+- 📋 AI-powered recipe recommendations
+- 📋 Voice commands for cooking mode
+- 📋 Integration with smart kitchen devices
+- 📋 Advanced analytics and insights
