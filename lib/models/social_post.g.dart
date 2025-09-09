@@ -1,0 +1,71 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'social_post.dart';
+
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class SocialPostAdapter extends TypeAdapter<SocialPost> {
+  @override
+  final int typeId = 12;
+
+  @override
+  SocialPost read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return SocialPost(
+      id: fields[0] as String,
+      uid: fields[1] as String,
+      recipeId: fields[2] as String?,
+      text: fields[3] as String,
+      imageUrl: fields[4] as String?,
+      likes: fields[5] as int,
+      comments: fields[6] as int,
+      visibility: fields[7] as String,
+      timestamp: fields[8] as DateTime,
+      createdAt: fields[9] as DateTime,
+      updatedAt: fields[10] as DateTime,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, SocialPost obj) {
+    writer
+      ..writeByte(11)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.uid)
+      ..writeByte(2)
+      ..write(obj.recipeId)
+      ..writeByte(3)
+      ..write(obj.text)
+      ..writeByte(4)
+      ..write(obj.imageUrl)
+      ..writeByte(5)
+      ..write(obj.likes)
+      ..writeByte(6)
+      ..write(obj.comments)
+      ..writeByte(7)
+      ..write(obj.visibility)
+      ..writeByte(8)
+      ..write(obj.timestamp)
+      ..writeByte(9)
+      ..write(obj.createdAt)
+      ..writeByte(10)
+      ..write(obj.updatedAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SocialPostAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

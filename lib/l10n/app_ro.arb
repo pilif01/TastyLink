@@ -1,0 +1,371 @@
+{
+  "@@locale": "ro",
+  "appTitle": "TastyLink",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "home": "Acasă",
+  "@home": {
+    "description": "Home tab label"
+  },
+  "saved": "Salvate",
+  "@saved": {
+    "description": "Saved recipes tab label"
+  },
+  "shopping": "Cumpărături",
+  "@shopping": {
+    "description": "Shopping list tab label"
+  },
+  "planner": "Planificator",
+  "@planner": {
+    "description": "Meal planner tab label"
+  },
+  "settings": "Setări",
+  "@settings": {
+    "description": "Settings tab label"
+  },
+  
+  "addRecipeLink": "Adaugă link rețetă",
+  "@addRecipeLink": {
+    "description": "Button text to add a recipe from a link"
+  },
+  "pasteLink": "Lipește link-ul aici",
+  "@pasteLink": {
+    "description": "Placeholder text for link input field"
+  },
+  "extractRecipe": "Extrage rețeta",
+  "@extractRecipe": {
+    "description": "Button text to extract recipe from link"
+  },
+  
+  "recipeTitle": "Titlu rețetă",
+  "@recipeTitle": {
+    "description": "Recipe title field label"
+  },
+  "ingredients": "Ingrediente",
+  "@ingredients": {
+    "description": "Ingredients section label"
+  },
+  "instructions": "Instrucțiuni",
+  "@instructions": {
+    "description": "Instructions section label"
+  },
+  "cookingTime": "Timp de gătit",
+  "@cookingTime": {
+    "description": "Cooking time field label"
+  },
+  "servings": "Porții",
+  "@servings": {
+    "description": "Servings field label"
+  },
+  
+  "saveRecipe": "Salvează rețeta",
+  "@saveRecipe": {
+    "description": "Button text to save recipe"
+  },
+  "editRecipe": "Editează rețeta",
+  "@editRecipe": {
+    "description": "Button text to edit recipe"
+  },
+  "deleteRecipe": "Șterge rețeta",
+  "@deleteRecipe": {
+    "description": "Button text to delete recipe"
+  },
+  "shareRecipe": "Partajează rețeta",
+  "@shareRecipe": {
+    "description": "Button text to share recipe"
+  },
+  
+  "startCooking": "Începe să gătești",
+  "@startCooking": {
+    "description": "Button text to start cooking mode"
+  },
+  "cookingMode": "Mod gătit",
+  "@cookingMode": {
+    "description": "Cooking mode page title"
+  },
+  
+  "addToShoppingList": "Adaugă la lista de cumpărături",
+  "@addToShoppingList": {
+    "description": "Button text to add ingredients to shopping list"
+  },
+  "shoppingList": "Lista de cumpărături",
+  "@shoppingList": {
+    "description": "Shopping list page title"
+  },
+  "clearList": "Șterge lista",
+  "@clearList": {
+    "description": "Button text to clear shopping list"
+  },
+  
+  "mealPlanner": "Planificator mese",
+  "@mealPlanner": {
+    "description": "Meal planner page title"
+  },
+  "addToPlanner": "Adaugă la planificator",
+  "@addToPlanner": {
+    "description": "Button text to add recipe to meal planner"
+  },
+  
+  "viewOriginal": "Vezi original",
+  "@viewOriginal": {
+    "description": "Button text to view original text"
+  },
+  "translatedToRomanian": "Tradus în română",
+  "@translatedToRomanian": {
+    "description": "Button text to view translated text"
+  },
+  
+  "language": "Limbă",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "theme": "Temă",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "notifications": "Notificări",
+  "@notifications": {
+    "description": "Notifications setting label"
+  },
+  "privacy": "Confidențialitate",
+  "@privacy": {
+    "description": "Privacy setting label"
+  },
+  "about": "Despre",
+  "@about": {
+    "description": "About setting label"
+  },
+  
+  "loading": "Se încarcă...",
+  "@loading": {
+    "description": "Loading text"
+  },
+  "error": "Eroare",
+  "@error": {
+    "description": "Error text"
+  },
+  "retry": "Încearcă din nou",
+  "@retry": {
+    "description": "Retry button text"
+  },
+  "cancel": "Anulează",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "done": "Gata",
+  "@done": {
+    "description": "Done button text"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  
+  "addLinkHint": "Lipește linkul aici",
+  "@addLinkHint": {
+    "description": "Hint text for link input field"
+  },
+  "processRecipe": "Procesează rețeta",
+  "@processRecipe": {
+    "description": "Button text to process recipe"
+  },
+  "addLinkText": "Adaugă un link de pe TikTok, Reels sau Shorts",
+  "@addLinkText": {
+    "description": "Text for empty state on home page"
+  },
+  
+  "original": "Original",
+  "@original": {
+    "description": "Original language toggle"
+  },
+  "romanian": "Română",
+  "@romanian": {
+    "description": "Romanian language toggle"
+  },
+  "recipeBy": "Rețetă de la @{handle}",
+  "@recipeBy": {
+    "description": "Recipe creator attribution",
+    "placeholders": {
+      "handle": {
+        "type": "String"
+      }
+    }
+  },
+  "watchVideo": "Vezi video",
+  "@watchVideo": {
+    "description": "Button to watch video"
+  },
+  "save": "Salvează",
+  "@save": {
+    "description": "Save button"
+  },
+  "openCookingMode": "Deschide în Mod Gătit",
+  "@openCookingMode": {
+    "description": "Button to open cooking mode"
+  },
+  
+  "steps": "Pași",
+  "@steps": {
+    "description": "Steps section title"
+  },
+  
+  "searchRecipes": "Caută rețete",
+  "@searchRecipes": {
+    "description": "Search recipes hint"
+  },
+  "noSavedRecipes": "Încă nu ai salvat rețete.",
+  "@noSavedRecipes": {
+    "description": "Empty state for saved recipes"
+  },
+  
+  "edit": "Editează",
+  "@edit": {
+    "description": "Edit button"
+  },
+  "delete": "Șterge",
+  "@delete": {
+    "description": "Delete button"
+  },
+  "like": "Like",
+  "@like": {
+    "description": "Like button"
+  },
+  "share": "Partajează",
+  "@share": {
+    "description": "Share button"
+  },
+  
+  "consolidateDuplicates": "Consolidează duplicatele",
+  "@consolidateDuplicates": {
+    "description": "Consolidate duplicates button"
+  },
+  "clearList": "Golește lista",
+  "@clearList": {
+    "description": "Clear shopping list button"
+  },
+  "noShoppingItems": "Lista de cumpărături este goală",
+  "@noShoppingItems": {
+    "description": "Empty shopping list message"
+  },
+  
+  "savedRecipes": "Rețete salvate",
+  "@savedRecipes": {
+    "description": "Saved recipes tab in planner"
+  },
+  "newLink": "Link nou",
+  "@newLink": {
+    "description": "New link tab in planner"
+  },
+  "camera": "Cameră",
+  "@camera": {
+    "description": "Camera tab in planner"
+  },
+  "generateWeeklyList": "Generează lista pentru săptămână",
+  "@generateWeeklyList": {
+    "description": "Generate weekly shopping list button"
+  },
+  
+  "publicProfile": "Profil public",
+  "@publicProfile": {
+    "description": "Public profile button"
+  },
+  "editProfile": "Editează profil",
+  "@editProfile": {
+    "description": "Edit profile button"
+  },
+  "darkMode": "Mod întunecat",
+  "@darkMode": {
+    "description": "Dark mode toggle"
+  },
+  "plannerReminders": "Memento planificare",
+  "@plannerReminders": {
+    "description": "Planner reminders setting"
+  },
+  "cookingTimers": "Cronometre gătit",
+  "@cookingTimers": {
+    "description": "Cooking timers setting"
+  },
+  "openFeed": "Deschide Feed",
+  "@openFeed": {
+    "description": "Open social feed button"
+  },
+  "appInfo": "Informații aplicație",
+  "@appInfo": {
+    "description": "App info section"
+  },
+  "version": "Versiune",
+  "@version": {
+    "description": "App version"
+  },
+  
+  "markAsCooked": "Marchează ca gătită",
+  "@markAsCooked": {
+    "description": "Mark recipe as cooked button"
+  },
+  "stepOf": "Pasul {current} din {total}",
+  "@stepOf": {
+    "description": "Step counter in cooking mode",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "addPhoto": "Adaugă foto",
+  "@addPhoto": {
+    "description": "Add photo button"
+  },
+  "extractText": "Extrage text din poză",
+  "@extractText": {
+    "description": "Extract text from photo option"
+  },
+  
+  "recipeSaved": "Rețeta a fost salvată!",
+  "@recipeSaved": {
+    "description": "Recipe saved success message"
+  },
+  "addedToShoppingList": "Adăugat în lista de cumpărături",
+  "@addedToShoppingList": {
+    "description": "Added to shopping list message"
+  },
+  "recipeProcessed": "Rețeta a fost procesată!",
+  "@recipeProcessed": {
+    "description": "Recipe processed success message"
+  },
+  
+  "breakfast": "Mic dejun",
+  "@breakfast": {
+    "description": "Breakfast meal type"
+  },
+  "lunch": "Pranz",
+  "@lunch": {
+    "description": "Lunch meal type"
+  },
+  "dinner": "Cina",
+  "@dinner": {
+    "description": "Dinner meal type"
+  },
+  "snack": "Gustare",
+  "@snack": {
+    "description": "Snack meal type"
+  },
+  
+  "confirm": "Confirmă",
+  "@confirm": {
+    "description": "Confirm button"
+  },
+  "yes": "Da",
+  "@yes": {
+    "description": "Yes button"
+  },
+  "no": "Nu",
+  "@no": {
+    "description": "No button"
+  }
+}

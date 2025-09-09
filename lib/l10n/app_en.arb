@@ -1,0 +1,165 @@
+{
+  "@@locale": "en",
+  "appTitle": "TastyLink",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "home": "Home",
+  "@home": {
+    "description": "Home tab label"
+  },
+  "saved": "Saved",
+  "@saved": {
+    "description": "Saved recipes tab label"
+  },
+  "shopping": "Shopping",
+  "@shopping": {
+    "description": "Shopping list tab label"
+  },
+  "planner": "Planner",
+  "@planner": {
+    "description": "Meal planner tab label"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings tab label"
+  },
+  
+  "addRecipeLink": "Add Recipe Link",
+  "@addRecipeLink": {
+    "description": "Button text to add a recipe from a link"
+  },
+  "pasteLink": "Paste link here",
+  "@pasteLink": {
+    "description": "Placeholder text for link input field"
+  },
+  "extractRecipe": "Extract Recipe",
+  "@extractRecipe": {
+    "description": "Button text to extract recipe from link"
+  },
+  
+  "recipeTitle": "Recipe Title",
+  "@recipeTitle": {
+    "description": "Recipe title field label"
+  },
+  "ingredients": "Ingredients",
+  "@ingredients": {
+    "description": "Ingredients section label"
+  },
+  "instructions": "Instructions",
+  "@instructions": {
+    "description": "Instructions section label"
+  },
+  "cookingTime": "Cooking Time",
+  "@cookingTime": {
+    "description": "Cooking time field label"
+  },
+  "servings": "Servings",
+  "@servings": {
+    "description": "Servings field label"
+  },
+  
+  "saveRecipe": "Save Recipe",
+  "@saveRecipe": {
+    "description": "Button text to save recipe"
+  },
+  "editRecipe": "Edit Recipe",
+  "@editRecipe": {
+    "description": "Button text to edit recipe"
+  },
+  "deleteRecipe": "Delete Recipe",
+  "@deleteRecipe": {
+    "description": "Button text to delete recipe"
+  },
+  "shareRecipe": "Share Recipe",
+  "@shareRecipe": {
+    "description": "Button text to share recipe"
+  },
+  
+  "startCooking": "Start Cooking",
+  "@startCooking": {
+    "description": "Button text to start cooking mode"
+  },
+  "cookingMode": "Cooking Mode",
+  "@cookingMode": {
+    "description": "Cooking mode page title"
+  },
+  
+  "addToShoppingList": "Add to Shopping List",
+  "@addToShoppingList": {
+    "description": "Button text to add ingredients to shopping list"
+  },
+  "shoppingList": "Shopping List",
+  "@shoppingList": {
+    "description": "Shopping list page title"
+  },
+  "clearList": "Clear List",
+  "@clearList": {
+    "description": "Button text to clear shopping list"
+  },
+  
+  "mealPlanner": "Meal Planner",
+  "@mealPlanner": {
+    "description": "Meal planner page title"
+  },
+  "addToPlanner": "Add to Planner",
+  "@addToPlanner": {
+    "description": "Button text to add recipe to meal planner"
+  },
+  
+  "viewOriginal": "View Original",
+  "@viewOriginal": {
+    "description": "Button text to view original text"
+  },
+  "translatedToRomanian": "Translated to Romanian",
+  "@translatedToRomanian": {
+    "description": "Button text to view translated text"
+  },
+  
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications setting label"
+  },
+  "privacy": "Privacy",
+  "@privacy": {
+    "description": "Privacy setting label"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About setting label"
+  },
+  
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading text"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error text"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Done button text"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  }
+}
