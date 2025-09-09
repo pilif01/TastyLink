@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "58215004641",
+    "project_id": "tastylink-bd947",
+    "storage_bucket": "tastylink-bd947.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58215004641:android:9b4a0acb8c0ca68763faa0",
+        "android_client_info": {
+          "package_name": "com.blueprint.tastylink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-VhVKjKnpbUqC7LeS1U04Wjx_7QXQ8uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

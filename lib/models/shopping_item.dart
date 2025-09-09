@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 part 'shopping_item.g.dart';
 
-@HiveType(typeId: 5)
+@HiveType(typeId: 9)
 class ShoppingItem extends HiveObject {
   @HiveField(0)
   final String id;

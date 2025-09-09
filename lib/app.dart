@@ -7,15 +7,23 @@ import 'router/app_router.dart';
 import 'theme/app_theme.dart';
 import 'l10n/app_localizations.dart';
 import 'services/data_service.dart';
+import 'core/constants.dart';
+import 'firebase/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize Firebase
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   
   // Initialize Hive
   await Hive.initFlutter();
+  
+  // Open basic Hive boxes
+  await Hive.openBox(Constants.recipesBox);
+  await Hive.openBox(Constants.settingsBox);
   
   // Initialize Data Service
   await DataService.instance.initialize();

@@ -104,7 +104,7 @@ class AnalyticsService {
       
       await _analytics.logEvent(
         name: eventName,
-        parameters: eventParams,
+        parameters: eventParams.cast<String, Object>(),
       );
       
       // Track event frequency

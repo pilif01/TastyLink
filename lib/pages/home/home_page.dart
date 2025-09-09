@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/recipe_card.dart';
 import '../../widgets/empty_state.dart';
@@ -86,48 +87,22 @@ class HomePage extends ConsumerWidget {
     ref.read(isProcessingProvider.notifier).state = true;
 
     try {
-      // Simulate recipe processing
-      await Future.delayed(const Duration(seconds: 2));
+      // Extract recipe from link
+      final recipe = await _extractRecipeFromLink(link);
       
-      // Create a mock recipe for demonstration
-      final mockRecipe = Recipe.createFromSource(
-        sourceLink: link,
-        title: 'Rețetă demonstrativă',
-        creatorHandle: 'chef_demo',
-        lang: 'ro',
-        text: RecipeText(
-          original: 'O rețetă delicioasă pentru demonstrație',
-          ro: 'O rețetă delicioasă pentru demonstrație',
-        ),
-        media: RecipeMedia(
-          coverImageUrl: 'https://picsum.photos/400/300?random=1',
-          stepPhotos: [
-            'https://picsum.photos/400/300?random=2',
-            'https://picsum.photos/400/300?random=3',
-          ],
-        ),
-        ingredients: [
-          Ingredient(name: 'făină', quantity: 2, unit: 'căni'),
-          Ingredient(name: 'zahăr', quantity: 1, unit: 'cană'),
-          Ingredient(name: 'ouă', quantity: 3, unit: 'bucăți'),
-        ],
-        steps: [
-          StepItem(index: 1, text: 'Amestecă ingredientele uscate', durationSec: 300),
-          StepItem(index: 2, text: 'Adaugă ingredientele lichide', durationSec: 180),
-          StepItem(index: 3, text: 'Coace la 180°C timp de 25 de minute', durationSec: 1500),
-        ],
-        tags: ['desert', 'coacere', 'dulce'],
-      );
-
-      ref.read(currentRecipeProvider.notifier).state = mockRecipe;
-      ref.read(isProcessingProvider.notifier).state = false;
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Rețeta a fost procesată!'),
-          backgroundColor: AppTheme.successColor,
-        ),
-      );
+      if (recipe != null) {
+        ref.read(currentRecipeProvider.notifier).state = recipe;
+        ref.read(isProcessingProvider.notifier).state = false;
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Rețeta a fost procesată cu succes!'),
+            backgroundColor: AppTheme.successColor,
+          ),
+        );
+      } else {
+        throw Exception('Nu s-a putut extrage rețeta din link');
+      }
     } catch (e) {
       ref.read(isProcessingProvider.notifier).state = false;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -139,14 +114,136 @@ class HomePage extends ConsumerWidget {
     }
   }
 
+  Future<Recipe?> _extractRecipeFromLink(String link) async {
+    try {
+      // For demonstration, we'll create a mock recipe based on the link
+      // In a real implementation, this would:
+      // 1. Fetch the content from the URL
+      // 2. Extract recipe data using web scraping or APIs
+      // 3. Parse the content using the RecipeExtractor
+      
+      await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+      
+      // Create a mock recipe based on the link
+      final isTikTok = link.contains('tiktok.com');
+      final isInstagram = link.contains('instagram.com');
+      final isYouTube = link.contains('youtube.com');
+      
+      String title;
+      String creatorHandle;
+      List<Ingredient> ingredients;
+      List<StepItem> steps;
+      List<String> tags;
+      
+      if (isTikTok) {
+        title = 'Rețetă TikTok - Desert Delicios';
+        creatorHandle = 'chef_tiktok';
+        ingredients = [
+          Ingredient(name: 'făină', quantity: 2, unit: 'căni', category: 'Pantry'),
+          Ingredient(name: 'zahăr', quantity: 1, unit: 'cană', category: 'Pantry'),
+          Ingredient(name: 'ouă', quantity: 3, unit: 'bucăți', category: 'Dairy & Eggs'),
+          Ingredient(name: 'unt', quantity: 100, unit: 'g', category: 'Dairy & Eggs'),
+          Ingredient(name: 'ciocolată', quantity: 200, unit: 'g', category: 'Pantry'),
+        ];
+        steps = [
+          StepItem(index: 1, text: 'Amestecă făina cu zahărul într-un bol mare', durationSec: 120),
+          StepItem(index: 2, text: 'Adaugă ouăle și untul topit, amestecă bine', durationSec: 180),
+          StepItem(index: 3, text: 'Incorporează ciocolata tăiată în bucăți mici', durationSec: 60),
+          StepItem(index: 4, text: 'Coace la 180°C timp de 25-30 de minute', durationSec: 1800),
+          StepItem(index: 5, text: 'Lasă să se răcească înainte de a servi', durationSec: 600),
+        ];
+        tags = ['desert', 'ciocolată', 'coacere', 'dulce', 'tiktok'];
+      } else if (isInstagram) {
+        title = 'Rețetă Instagram - Salată Sănătoasă';
+        creatorHandle = 'healthy_chef';
+        ingredients = [
+          Ingredient(name: 'salată verde', quantity: 1, unit: 'bucată', category: 'Vegetables'),
+          Ingredient(name: 'roșii cherry', quantity: 200, unit: 'g', category: 'Vegetables'),
+          Ingredient(name: 'castraveți', quantity: 1, unit: 'bucată', category: 'Vegetables'),
+          Ingredient(name: 'avocado', quantity: 1, unit: 'bucată', category: 'Vegetables'),
+          Ingredient(name: 'ulei de măsline', quantity: 3, unit: 'linguri', category: 'Condiments & Oils'),
+          Ingredient(name: 'sare', quantity: 1, unit: 'vârf de cuțit', category: 'Pantry'),
+        ];
+        steps = [
+          StepItem(index: 1, text: 'Spală și taie salata în bucăți mici', durationSec: 120),
+          StepItem(index: 2, text: 'Taie roșiile cherry în jumătăți', durationSec: 90),
+          StepItem(index: 3, text: 'Tăie castraveții în felii subțiri', durationSec: 60),
+          StepItem(index: 4, text: 'Curăță avocado-ul și taie-l în cuburi', durationSec: 120),
+          StepItem(index: 5, text: 'Amestecă toate ingredientele într-un bol mare', durationSec: 60),
+          StepItem(index: 6, text: 'Condimentează cu ulei de măsline și sare', durationSec: 30),
+        ];
+        tags = ['salată', 'sănătos', 'vegetarian', 'rapid', 'instagram'];
+      } else if (isYouTube) {
+        title = 'Rețetă YouTube - Paste Carbonara';
+        creatorHandle = 'italian_chef';
+        ingredients = [
+          Ingredient(name: 'paste', quantity: 400, unit: 'g', category: 'Pantry'),
+          Ingredient(name: 'bacon', quantity: 200, unit: 'g', category: 'Meat & Seafood'),
+          Ingredient(name: 'ouă', quantity: 4, unit: 'bucăți', category: 'Dairy & Eggs'),
+          Ingredient(name: 'parmezan', quantity: 100, unit: 'g', category: 'Dairy & Eggs'),
+          Ingredient(name: 'piper negru', quantity: 1, unit: 'vârf de cuțit', category: 'Pantry'),
+          Ingredient(name: 'sare', quantity: 1, unit: 'lingură', category: 'Pantry'),
+        ];
+        steps = [
+          StepItem(index: 1, text: 'Fierbe pastele conform instrucțiunilor de pe pachet', durationSec: 600),
+          StepItem(index: 2, text: 'Tăie bacon-ul în bucăți mici și prăjește-l', durationSec: 300),
+          StepItem(index: 3, text: 'Bate ouăle cu parmezanul și piperul', durationSec: 120),
+          StepItem(index: 4, text: 'Amestecă pastele cu bacon-ul prăjit', durationSec: 60),
+          StepItem(index: 5, text: 'Adaugă amestecul de ouă și amestecă rapid', durationSec: 30),
+          StepItem(index: 6, text: 'Servește imediat cu parmezan suplimentar', durationSec: 30),
+        ];
+        tags = ['paste', 'italian', 'carbonara', 'rapid', 'youtube'];
+      } else {
+        // Generic recipe for other links
+        title = 'Rețetă Delicioasă';
+        creatorHandle = 'chef_online';
+        ingredients = [
+          Ingredient(name: 'ingredient principal', quantity: 500, unit: 'g', category: 'Other'),
+          Ingredient(name: 'condimente', quantity: 1, unit: 'lingură', category: 'Pantry'),
+          Ingredient(name: 'sare', quantity: 1, unit: 'vârf de cuțit', category: 'Pantry'),
+        ];
+        steps = [
+          StepItem(index: 1, text: 'Pregătește ingredientele principale', durationSec: 300),
+          StepItem(index: 2, text: 'Condimentează după gust', durationSec: 60),
+          StepItem(index: 3, text: 'Gătește conform instrucțiunilor', durationSec: 600),
+        ];
+        tags = ['rețetă', 'gătit', 'delicios'];
+      }
+      
+      return Recipe.createFromSource(
+        sourceLink: link,
+        title: title,
+        creatorHandle: creatorHandle,
+        lang: 'ro',
+        text: RecipeText(
+          original: 'Rețetă extrasă din $link',
+          ro: 'Rețetă extrasă din $link',
+        ),
+        media: RecipeMedia(
+          coverImageUrl: 'https://picsum.photos/400/300?random=${DateTime.now().millisecondsSinceEpoch}',
+          stepPhotos: [
+            'https://picsum.photos/400/300?random=${DateTime.now().millisecondsSinceEpoch + 1}',
+            'https://picsum.photos/400/300?random=${DateTime.now().millisecondsSinceEpoch + 2}',
+          ],
+        ),
+        ingredients: ingredients,
+        steps: steps,
+        tags: tags,
+      );
+    } catch (e) {
+      throw Exception('Eroare la extragerea rețetei: $e');
+    }
+  }
+
   void _saveRecipe(BuildContext context, WidgetRef ref) {
     final currentRecipe = ref.read(currentRecipeProvider);
     if (currentRecipe != null) {
-      // Save recipe logic here
+      // TODO: Implement save recipe functionality
+      // This would save the recipe to the user's saved recipes
       ref.read(showConfettiProvider.notifier).state = true;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Rețeta a fost salvată!'),
+          content: Text('Rețeta "${currentRecipe.title}" a fost salvată!'),
           backgroundColor: AppTheme.successColor,
         ),
       );
@@ -156,10 +253,11 @@ class HomePage extends ConsumerWidget {
   void _addToShoppingList(BuildContext context, WidgetRef ref) {
     final currentRecipe = ref.read(currentRecipeProvider);
     if (currentRecipe != null) {
-      // Add to shopping list logic here
+      // TODO: Implement add to shopping list functionality
+      // This would add the recipe's ingredients to the shopping list
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Adăugat în lista de cumpărături'),
+          content: Text('Ingredientele au fost adăugate la lista de cumpărături'),
           backgroundColor: AppTheme.successColor,
         ),
       );
@@ -167,8 +265,10 @@ class HomePage extends ConsumerWidget {
   }
 
   void _openCookingMode(BuildContext context, WidgetRef ref) {
-    // Navigate to cooking mode
-    // This would be implemented with proper routing
+    final currentRecipe = ref.read(currentRecipeProvider);
+    if (currentRecipe != null) {
+      context.go('/cooking/${currentRecipe.id}');
+    }
   }
 
   void _newRecipe(WidgetRef ref) {
@@ -247,7 +347,7 @@ class _RecipeDisplay extends StatelessWidget {
         children: [
           RecipeCard(
             recipe: recipe,
-            onTap: () {}, // Add required onTap parameter
+            onTap: () => context.go('/recipe/${recipe.id}'),
             onSave: onSave,
             onAddToShoppingList: onAddToShoppingList,
             onOpenCookingMode: onOpenCookingMode,
